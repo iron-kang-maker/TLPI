@@ -2,7 +2,9 @@
 #include <sys/time.h>
 #include <time.h>
 #include "tlpi_hdr.h"
+#ifdef WIRINGPI
 #include "wiringPi.h"
+#endif
 
 static volatile sig_atomic_t gotAlarm = 0;
 static int toggle = 0;
@@ -43,7 +45,9 @@ static void sigalrmHandler(int sig)
 {
 	gotAlarm = 1;
 	toggle ^= 1;
+#ifdef WIRINGPI
 	digitalWrite(25, toggle);
+#endif
 }
 
 int main(int argc, char *argv[])
@@ -58,8 +62,10 @@ int main(int argc, char *argv[])
 	if (argc > 1 && strcmp(argv[1], "--help") == 0)
 		usageErr("%s [secs [usecs [int-secs [int-usecs]]]]\n", argv[0]);
 
+#ifdef WIRINGPI
 	wiringPiSetup();
 	pinMode(25, OUTPUT);
+#endif
 	sigCnt = 0;
 
 	sigemptyset(&sa.sa_mask);
