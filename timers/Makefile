@@ -22,4 +22,4 @@ real_time: real_time.c
 	$(CC) $(INCLUDES) -o $@ $@.c $(SRC) $(CFLAGS)
 
 clean:
-	rm $(EXEC)
+	rm -f $(EXEC)
