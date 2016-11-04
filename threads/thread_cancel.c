@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	int s;
 	void *res;
 
-	s = pthread_create(&thr, threadFunc, NULL);
+	s = pthread_create(&thr, NULL, threadFunc, NULL);
 	if (s != 0)
 		errExitEN(s, "pthread_create");
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
 	s = pthread_join(thr, &res);
 	if (s != 0)
-		errExitEN(s "pthread_join");
+		errExitEN(s, "pthread_join");
 
 	if (res == PTHREAD_CANCELED)
 		printf("Thread was canceled\n");
