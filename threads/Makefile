@@ -8,7 +8,8 @@ EXEC += simple_thread \
 		thread_incr \
 		thread_multijoin \
 		thread_cancel \
-		thread_cleanup
+		thread_cleanup \
+		thread_cpu
 SRC = $(wildcard $(INCDIR)/*.c)
 
 all: $(EXEC)
@@ -26,6 +27,9 @@ thread_cancel: thread_cancel.c
 	$(CC) $(INCLUDES) -o $@ $@.c $(SRC) $(CFLAGS)
 
 thread_cleanup: thread_cleanup.c
+	$(CC) $(INCLUDES) -o $@ $@.c $(SRC) $(CFLAGS)
+
+thread_cpu: thread_cpu.c
 	$(CC) $(INCLUDES) -o $@ $@.c $(SRC) $(CFLAGS)
 
 clean:
